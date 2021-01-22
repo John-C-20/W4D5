@@ -63,7 +63,7 @@ end
 #     largest_contiguous_subsum(list) # => -1 (from [-1])
 
 # Phase I
-
+# 
 # Write a function that iterates through the array and finds all sub-arrays using nested loops. First make an array to hold all sub-arrays. Then find the sums of each sub-array and return the max.
 
 # Discuss the time complexity of this solution.
@@ -75,53 +75,27 @@ def largest_contiguous_subsum1(arr)
             new_arr << arr[idx..i]  #O(n) bc worst case scenario is i 
         end                             
     end
-    new_arr.flatten.sum 
+    new_arr.map {|ele| ele.sum}.max
 end
 
 # Phase II
-
-# Let's make a better version. Write a new function using O(n) time with O(1) memory. Keep a running tally of the largest sum. To accomplish this efficient space complexity, consider using two variables. One variable should track the largest sum so far and another to track the current sum. We'll leave the rest to you.
+# Let's make a better version. Write a new function using O(n) time with O(1) memory. Keep a running tally of the largest sum. To accomplish this efficient space complexity, 
+# consider using two variables. One variable should track the largest sum so far and another to track the current sum. We'll leave the rest to you.
 
 # Get your story straight, and then explain your solution's time complexity to your TA.
+#     list = [2, 3, -6, 7, -6, 7]
+def largest_contiguous_subsum2(arr)
+    largest_sum = 0
+    current_sum = 0
 
+    arr.each do |ele|
+       current_sum += ele  
+        if largest_sum < current_sum 
+            largest_sum = current_sum
+        elsif  current_sum < 0 
+            current_sum = 0
+        end
+    end
+    largest_sum
+end
 
-
-
-
-[1,2,3,4] # n = 4 
-
-[1,1]
-[1,2]
-[1,3]
-[1,4]
-[2,1]
-[2,2]
-[2,3]
-[2,4]
-[3,1]
-[3,2]
-[3,3]
-[3,4]
-[4,1]
-[4,2]
-[4,3]
-[4,4]
-#16  
-# n^2 
-
-[1]
-[1,2]
-[1,2,3]
-[1,2,3,4]
-[2]
-[2,3]
-[2,3,4]
-[3]
-[3,4]
-[4]
-n = 4
-#10 
-n = 3 
-# 6 
-
-[3,6] [4,10] [5,15]
